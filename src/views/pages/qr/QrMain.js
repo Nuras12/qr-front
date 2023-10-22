@@ -36,6 +36,7 @@ const Login = () => {
         <CRow className="justify-content-center">
           <CCol md={8}>
             <QrReader
+              constraints={{ facingMode: 'environment' }}
               onResult={(result, error) => {
                 if (!!result) {
                   setQr(result?.text)
