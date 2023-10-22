@@ -29,6 +29,7 @@ const Login = () => {
       const ticket_ = await api.qrApi.getTicketById(id)
       setTicket(ticket_)
       console.log('ticket_', ticket_)
+      navigate('/qr')
     } catch (error) {
       console.log(error?.response.data)
       setMessage(error?.response.data.message)
