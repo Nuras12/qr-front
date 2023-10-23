@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { CButton, CButtonGroup, CRow, CContainer } from '@coreui/react'
 import { api } from 'src/api'
 import { useNavigate, useParams } from 'react-router-dom'
+import boopSfx from './audio.mp3'
+
 const Login = () => {
   const [ticket, setTicket] = useState({ available: 0, total: 0 })
   const [message, setMessage] = useState('')
   const [divId, setDivId] = useState('')
   const { id } = useParams()
   const navigate = useNavigate()
+  const audio = new Audio(boopSfx)
 
   useEffect(() => {
     const call = async () => {
@@ -50,6 +53,7 @@ const Login = () => {
   const back = async (toBlink = true) => {
     if (toBlink) {
       setDivId('blink')
+      audio.play()
       setTimeout(() => navigate('/qr'), 2000)
       return
     }
