@@ -6,35 +6,43 @@ import { useNavigate } from 'react-router-dom'
 const Login = () => {
   const navigate = useNavigate()
 
-  const setQr = async (ticketId) => {
-    if (!ticketId) {
+  const setQr = async (txt) => {
+    if (!txt) {
       return
     }
 
+    const pattern = /SP(\d{5})E/
+    const match = txt.match(pattern)
+
+    if (!match) {
+      return navigate('/qr/grey/4')
+    }
+
+    const ticketId = match[1]
+
     try {
       const res = await api.qrApi.getTicketById(ticketId)
-      console.log(res, res.available <= 0, res.available)
       if (res.available <= 0) {
-        navigate('/grey/1')
+        return navigate('/qr/grey/1')
       }
 
-      navigate(`/qr/choose/${ticketId}`)
-
-      console.log({ res })
+      return navigate(`/qr/choose/${ticketId}`)
     } catch (error) {
+      console.log(error?.response.data.statusCode === 401, '!!!!')
+
       if (error?.response.data.statusCode === 401) {
-        navigate('/login')
+        return navigate('/login')
       }
 
       if (error?.response.data.statusCode === 404) {
-        navigate('/grey/2')
+        return navigate('/grey/2')
       }
 
       if (error?.response.data.statusCode === 422) {
-        navigate('/grey/3')
+        return navigate('/qr/grey/3')
       }
 
-      navigate(`/grey/${error?.response.data.message}`)
+      navigate(`/qr/grey/${error?.response.data.message}`)
     }
   }
   return (

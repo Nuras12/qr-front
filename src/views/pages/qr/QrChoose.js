@@ -63,24 +63,22 @@ const Login = () => {
         <h2>QR-чекер</h2>
       </header>
       <CContainer>
-        <CButtonGroup role="group" aria-label="Basic example">
-          <CRow xs className="justify-content-center">
-            {[...Array(ticket.total).keys()].map((num, idx) => (
-              <div className="col-4" key={idx}>
-                <CButton
-                  xs={12}
-                  style={{ width: '80px', height: '80px', fontSize: 38 }}
-                  className="p-2 m-2 "
-                  color={num + 1 > ticket.available ? 'secondary' : 'success'}
-                  disabled={num + 1 > ticket.available}
-                  onClick={() => apply(num + 1)}
-                >
-                  {num + 1}
-                </CButton>
-              </div>
-            ))}
-          </CRow>
-        </CButtonGroup>
+        <CRow xs className="justify-content-center row">
+          {[...Array(ticket.total).keys()].map((num, idx) => (
+            <div className="col-4" key={idx}>
+              <CButton
+                xs={12}
+                style={{ width: '80px', height: '80px', fontSize: 38 }}
+                className="p-2 m-2 "
+                color={num + 1 > ticket.available ? 'secondary' : 'success'}
+                disabled={num + 1 > ticket.available}
+                onClick={() => apply(num + 1)}
+              >
+                {num + 1}
+              </CButton>
+            </div>
+          ))}
+        </CRow>
 
         <CRow className="mt-3">
           <div className="col-6">
