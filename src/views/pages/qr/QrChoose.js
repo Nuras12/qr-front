@@ -86,7 +86,7 @@ const Login = () => {
               xs={12}
               color="primary"
               className="border"
-              style={{ fontSize: 24, height: '80px' }}
+              style={{ fontSize: 20, height: '80px' }}
               disabled={ticket.available <= 0}
               onClick={() => applyAll()}
             >
@@ -98,7 +98,7 @@ const Login = () => {
               xs={12}
               color="primary"
               className="border"
-              style={{ fontSize: 24, height: '80px' }}
+              style={{ fontSize: 20, height: '80px' }}
               onClick={() => back(false)}
             >
               Сканировать другой
