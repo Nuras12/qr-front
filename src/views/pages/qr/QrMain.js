@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { CCol, CContainer, CRow } from '@coreui/react'
 import { QrReader } from 'react-qr-reader'
 import { api } from 'src/api'
 import { useNavigate } from 'react-router-dom'
 const Login = () => {
-  const [data, setData] = useState('')
   const navigate = useNavigate()
 
   const setQr = async (ticketId) => {
@@ -16,8 +15,7 @@ const Login = () => {
       const res = await api.qrApi.getTicketById(ticketId)
       console.log(res, res.available <= 0, res.available)
       if (res.available <= 0) {
-        setData('Данный билет не имеет доступных сканирований')
-        return
+        navigate('/grey/1')
       }
 
       navigate(`/qr/choose/${ticketId}`)
@@ -27,7 +25,16 @@ const Login = () => {
       if (error?.response.data.statusCode === 401) {
         navigate('/login')
       }
-      setData(error?.response.data.message)
+
+      if (error?.response.data.statusCode === 404) {
+        navigate('/grey/2')
+      }
+
+      if (error?.response.data.statusCode === 422) {
+        navigate('/grey/3')
+      }
+
+      navigate(`/grey/${error?.response.data.message}`)
     }
   }
   return (
@@ -48,7 +55,6 @@ const Login = () => {
               }}
               style={{ width: '100%' }}
             />
-            <p>{data}</p>
           </CCol>
         </CRow>
       </CContainer>

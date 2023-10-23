@@ -12,6 +12,7 @@ const loading = (
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const Qr = React.lazy(() => import('./views/pages/qr/QrMain'))
 const QrChoose = React.lazy(() => import('./views/pages/qr/QrChoose'))
+const GreyMessage = React.lazy(() => import('./views/pages/qr/QrGrey'))
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route exact path="/qr" name="QR Page" element={<Qr />} />
+            <Route exact path="/qr/grey/:id" name="QR Page" element={<GreyMessage />} />
             <Route exact path="/qr/choose/:id" name="QR Page" element={<QrChoose />} />
           </Routes>
         </Suspense>

@@ -1,1 +1,16 @@
 // Here you can add other styles
+
+@keyframes blinking {
+    50% {
+        border-color: #0d9c00;
+      }
+}
+
+  #blink {
+    // border:10px #00880c solid;
+    border: 20px solid #ffffff;
+
+    animation-name: blinking;
+    animation-duration: 2.5s;
+    animation-iteration-count: 2;
+  }
