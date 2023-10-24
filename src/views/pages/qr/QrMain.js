@@ -35,7 +35,7 @@ const Login = () => {
       }
 
       if (error?.response.data.statusCode === 404) {
-        return navigate('/grey/2')
+        return navigate('/qr/grey/2')
       }
 
       if (error?.response.data.statusCode === 422) {
